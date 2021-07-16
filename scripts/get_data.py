@@ -22,11 +22,15 @@ class HoneyIncomeAccounting(QDialog):
         #Кнопка заноса данных.
         self.btn_push_data = QPushButton("Занести данные", self)
         self.btn_push_data.move(50, 130)
-
-        #Привязка к кнопке функции заноса данных.
         self.btn_push_data.clicked.connect(self.get_customer_info)
 
+        #Кнопка вывода общего результата.
+        self.btn_watch_main_data = QPushButton("Посмотреть количество проданных банок и заработок с них.", self)
+        self.btn_watch_main_data.move(50, 200)
+        self.btn_watch_main_data.clicked.connect(self.get_main_data)
+
         self.PATH_TO_OUTPUT = "D:\\GitHub projects\\honey_income_accounting\\txt_files\\output.txt"
+        self.end_result = "\nКоличество проданных банок: 0 Количество заработанных денег: 0 руб."
 
     def get_customer_info(self):
         """Получение информации о покупке меда."""
@@ -52,6 +56,9 @@ class HoneyIncomeAccounting(QDialog):
             new_price = old_price + (price_for_jar * quantity_of_jars)
             new_result = f"\nКоличество проданных банок: {new_quantity} Количество заработанных денег: {new_price} руб."
 
+            #Обновление общей инфы.
+            self.end_result = new_result 
+
             # Удаление устаревшой информации о цене и количестве купленных банок.
             del(file_data[-1])
 
@@ -66,6 +73,9 @@ class HoneyIncomeAccounting(QDialog):
         #Показ пользователю, что все хорошо.
         QMessageBox.information(self, "Успешно!", "Данные занесены!")
         
+    def get_main_data(self):
+        """Получение количества проданных банок и заработок с них."""
+        QMessageBox.information(self, "Информация", self.end_result)
 
 
 if __name__ == "__main__":
