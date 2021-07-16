@@ -29,7 +29,7 @@ class HoneyIncomeAccounting(QDialog):
         self.btn_watch_main_data.move(50, 200)
         self.btn_watch_main_data.clicked.connect(self.get_main_data)
 
-        self.PATH_TO_OUTPUT = "D:\\GitHub projects\\honey_income_accounting\\txt_files\\output.txt"
+        self.PATH_TO_OUTPUT = "txt_files\\output.txt"
         self.end_result = "\nКоличество проданных банок: 0 Количество заработанных денег: 0 руб."
 
     def get_customer_info(self):
